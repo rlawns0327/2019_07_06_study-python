@@ -119,3 +119,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# 아래 코드는 herok 상에서만 동작해야합니다.
+# 몽키패칭
+import sys
+if 'win' not in sys.platform and 'darwin' != sys.platform:
+    import django_heroku
+    django_heroku.settings(locals())
